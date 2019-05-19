@@ -1,0 +1,63 @@
+{
+	"plugin_id": "gardenaift",
+	"name_fr": "Gardena Smart System IFTTT",
+	"icon": "gardenaifttt.png",
+	"version": "1.00",
+	"creation_date": "2019-05-11",
+	"modification_date": "2019-05-11",
+	"author": "Influman",
+	"description_fr": "Contrôle des appareils Smart System de <a href='https://www.gardena.com/fr/outils-jardin/jardin-connecte-smart-system/'>Gardena</a> via <a href='https://ifttt.com'>IFTTT</a><br>NB : Ce plug-in installe simplement un périphérique standard pour déclencher les Webhooks (THIS) IFTTT de contrôle de systèmes connectés Gardena (THAT)<br>Appareils : SILENO, Water & Irrigation Control, Power Socket",
+	"description_en": "",
+	"description_es": "",
+	"description_it": "",
+	"description_de": "",
+	"forum_link": "",
+	"parameters": 
+	[
+		{
+			"parameter": "IFTTT_KEY", 
+			"description": "Key Webhooks IFTTT :",
+			"xtype": "textfield",
+			"default_value": "",
+			"field": "width:250, allowBlank:false"
+        }
+	 ],
+	"scripts":
+	[
+		{
+			"name": "gardenaifttt.php"
+		}
+	],
+	"devices":
+    [
+		{
+			"device_id": "control",
+			"module_id": "41",
+			"type": "http",
+			"name_fr": "Gardena Smart System IFTTT",
+			"icon": "gardenacontrol.png",
+			"utilisation_id": "43",
+			"parameters":
+			{
+				"VAR1": "plugin.parameters.IFTTT_KEY",
+				"VAR2": "",
+				"VAR3": "",
+				"value_type": "list",
+				"ignore_errors": 3,
+				"RAW_URL": "",
+				"RAW_XPATH": "",
+				"POLLING": "0"
+			},
+			"values":
+			[
+				{ "value": "gardena-arrosage-start", "description": "Arrosage manuel", "icon": "gardenastart.png", "http_url": "http://localhost/script/?exec=gardenaifttt.php", "http_type": "GET",  "http_params": "&value=[RAW_VALUE]&key=[VAR1]" },
+				{ "value": "gardena-arrosage-stop", "description": "Stop arrosage", "icon": "gardenastop.png", "http_url": "http://localhost/script/?exec=gardenaifttt.php", "http_type": "GET",  "http_params": "&value=[RAW_VALUE]&key=[VAR1]" },
+				{ "value": "gardena-prog-pause", "description": "Bloquer programmation", "icon": "gardenaprogpause.png", "http_url": "http://localhost/script/?exec=gardenaifttt.php", "http_type": "GET",  "http_params": "&value=[RAW_VALUE]&key=[VAR1]" },
+				{ "value": "gardena-prog-unpause", "description": "Débloquer programmation", "icon": "gardenaprogunpause.png", "http_url": "http://localhost/script/?exec=gardenaifttt.php", "http_type": "GET",  "http_params": "&value=[RAW_VALUE]&key=[VAR1]" },
+				{ "value": "gardena-sileno-start", "description": "Lancer tondeuse", "icon": "gardenasilenostart.png", "http_url": "http://localhost/script/?exec=gardenaifttt.php", "http_type": "GET",  "http_params": "&value=[RAW_VALUE]&key=[VAR1]" },
+				{ "value": "gardena-sileno-stop", "description": "Arrêter tondeuse", "icon": "gardenasilenostop.png", "http_url": "http://localhost/script/?exec=gardenaifttt.php", "http_type": "GET",  "http_params": "&value=[RAW_VALUE]&key=[VAR1]" }
+			]
+		}
+		
+	]
+}
